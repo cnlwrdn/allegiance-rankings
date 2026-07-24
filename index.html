@@ -80,14 +80,14 @@ h1 .l2{display:block;color:transparent;-webkit-text-stroke:1.5px rgba(255,210,87
 @keyframes dip{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(7px);opacity:1}}
 
 /* ---------- tiers ---------- */
-.tier{min-height:94svh;display:flex;align-items:center;justify-content:center;padding:12px 18px 26svh}
+.tier{min-height:135svh;display:flex;align-items:flex-start;justify-content:center;padding:14svh 18px 0}
 .card{width:100%;max-width:560px;border-radius:22px;padding:26px 26px 24px;position:relative;overflow:hidden;
   background:rgba(11,16,30,.72);
   border:1px solid rgba(158,180,220,.13);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   box-shadow:0 24px 70px rgba(0,0,0,.45);
   opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,.9,.3,1),border-color .6s,box-shadow .6s}
-.tier.seen .card{opacity:1;transform:none}
+.card.seen{opacity:1;transform:none}
 .tier.active .card{border-color:color-mix(in srgb,var(--tc) 45%,transparent);
   box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 60px color-mix(in srgb,var(--tc) 12%,transparent)}
 .card::before{content:'';position:absolute;top:0;left:24px;right:24px;height:1px;
@@ -553,7 +553,7 @@ function setHud(s){
 var io=new IntersectionObserver(function(es){
   es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('seen');});
 },{threshold:0.22});
-tiers.forEach(function(t){io.observe(t);});
+tiers.forEach(function(t){io.observe(t.querySelector('.card'));});
 
 function onScroll(){
   var doc=document.documentElement;

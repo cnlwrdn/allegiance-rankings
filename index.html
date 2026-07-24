@@ -37,7 +37,7 @@ body{
 #grab{position:fixed;left:0;right:0;bottom:0;height:32svh;z-index:1;touch-action:pan-y;cursor:grab}
 #grab:active{cursor:grabbing}
 
-#bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:6;pointer-events:none;
+#bar{position:fixed;top:env(safe-area-inset-top,0);left:0;right:0;height:3px;z-index:6;pointer-events:none;
   background:var(--acc,#ffd257);transform-origin:0 50%;transform:scaleX(0);
   transition:background .6s ease;box-shadow:0 0 12px var(--acc,#ffd257)}
 #hud{position:fixed;left:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;pointer-events:none;
@@ -557,7 +557,7 @@ tiers.forEach(function(t){io.observe(t.querySelector('.card'));});
 
 function onScroll(){
   var doc=document.documentElement;
-  var f=doc.scrollTop/(doc.scrollHeight-innerHeight||1);
+  var f=Math.max(0,Math.min(1,doc.scrollTop/(doc.scrollHeight-innerHeight||1)));
   bar.style.transform='scaleX('+f+')';
   var focus=innerHeight*0.44,found=-1;
   for(var i=0;i<tiers.length;i++){
